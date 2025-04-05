@@ -18,7 +18,7 @@ session_start();
   <title>Formulaire Étudiant</title>
   <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">-->
  <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css"> 
-
+  
 
 </head>
 
@@ -100,12 +100,21 @@ session_start();
           <?php
           // Pour chaque étudiant, afficher la note ou un vide si l'étudiant n'a pas cette note
           foreach ($_SESSION['etudiants'] as $etudiant):
-              echo '<td>';
-              if (isset($etudiant->notes[$i])) {
-                  echo $etudiant->notes[$i];
-              }
-              else echo "---";
-              echo '</td>';
+              if (isset($etudiant->notes[$i])):
+                  if($etudiant->notes[$i]<10){
+                    $bgColor="rgb(193, 54, 54)";
+                  }
+                  elseif($etudiant->notes[$i]==10){
+                    $bgColor="rgb(213, 126, 54)";
+                  }
+                  else{
+                    $bgColor="rgb(95, 171, 89)";
+                  }?>
+                  <td style="background-color:<?php  echo $bgColor ?>;">
+   
+                  <?php echo $etudiant->notes[$i];
+                  echo '</td>';
+                endif;
           endforeach;
           ?>
         </tr>
