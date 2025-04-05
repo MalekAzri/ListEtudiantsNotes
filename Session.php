@@ -11,16 +11,23 @@ class Session{
         if(!isset($_SESSION['etudiants'])){
             $_SESSION['etudiants']=[];
         }
+        if(!isset($_SESSION["compteur"])){
+            $_SESSION["compteur"]=0;
+        }
     
     $this->etudiants=$_SESSION['etudiants'];//pour que la variable $etudiants contienne ce qu'il ya dans $_SESSION['etudiants'] dejà
+    self::$c=$_SESSION["compteur"];//sinon la variable $c va etre réinitialisée à 0 à chaque fois qu'on recharge la page
     $this->idSession=self::$c++;//incrementation de la variable statique $c pour chaque nouvelle session
+    $_SESSION["compteur"]=self::$c;//pour que la variable de session globale contienne le compteur mis à jour
+
     SessionManager::ajouterSession($this);//ajout de la session à la liste des sessions
     }
     public function ajouterEtudiant(Etudiant $etudiant):void{
         $this->etudiants[]=$etudiant;
         $_SESSION['etudiants']=$this->etudiants;//pour que la variable de session contienne le tableau d'etudiants mis à jour
+    
     }
-    public function getEtudiants():array{
+        public function getEtudiants():array{
         return $this->etudiants;
     }
     public function getId(){
