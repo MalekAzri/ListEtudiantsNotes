@@ -14,8 +14,23 @@ include "header.php";
 ?>
 
 <p class="hello text-break p-3 bg-light border rounded shadow-sm" style="text-align: center;"><?php echo $text; ?></p>
+<form method="post">
 
+<div class="text-center">
+  <button type="submit" class="btn btn-dark" name="reload">
+    reload session
+  </button>
+</div>
+
+</form>
 
 
 </body>
 </html>
+<?php
+if(isset($_POST['reload'])){
+    session_unset();
+    session_destroy();
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}

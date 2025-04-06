@@ -1,6 +1,5 @@
 <?php
 include_once 'Etudiant.php';
-include_once 'SessionManager.php';
 class Session{
     private array $etudiants=[];
     private int $idSession;
@@ -20,7 +19,6 @@ class Session{
     $this->idSession=self::$c++;//incrementation de la variable statique $c pour chaque nouvelle session
     $_SESSION["compteur"]=self::$c;//pour que la variable de session globale contienne le compteur mis à jour
 
-    SessionManager::ajouterSession($this);//ajout de la session à la liste des sessions
     }
     public function ajouterEtudiant(Etudiant $etudiant):void{
         $this->etudiants[]=$etudiant;
